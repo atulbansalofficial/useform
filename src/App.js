@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useForm } from "react-hook-form";
+import "./App.css";
 
 function App() {
+  function requestDTO(formData) {
+    return { ...formData };
+  }
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    const requestPayload = requestDTO(data);
+    console.log("requestPayload", requestPayload);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          type="text"
+          placeholder="class"
+          {...register("education.0.class")}
+        />
+        <input
+          type="text"
+          placeholder="collage"
+          {...register("education.0.collage")}
+        />
+        <input
+          type="text"
+          placeholder="school"
+          {...register("education.0.school")}
+        />{" "}
+        <br />
+        <input type="Submit" />
+      </form>
+      <div></div>
     </div>
   );
 }
