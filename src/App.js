@@ -1,10 +1,11 @@
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./App.css";
 
 function App() {
-  function requestDTO(formData) {
-    return { ...formData };
-  }
+  const [values, setValues] = useState();
+
+ 
 
   const {
     register,
@@ -14,11 +15,13 @@ function App() {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    const requestPayload = requestDTO(data);
-    console.log("requestPayload", requestPayload);
+    setValues()
+    
   };
   return (
     <div className="App">
+      {/* <h1> {values}</h1> */}
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           type="text"
@@ -38,7 +41,6 @@ function App() {
         <br />
         <input type="Submit" />
       </form>
-      <div></div>
     </div>
   );
 }
